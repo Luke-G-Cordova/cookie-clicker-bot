@@ -1,0 +1,21 @@
+cookie: 
+    x: 300
+    y: 500
+scroll: 
+    x: 2060
+    y: 470
+upgrades:
+    x: 1615
+    y: 486
+sideButtons[0]: 
+    x: 1662
+    y: 619
+    height: 64
+    width: 300
+    dark rgb: [6, 18, 24]
+store scroll:
+    x: 1728
+    y: 246
+invisible scroll: 
+    yUp: 110
+    yDown: 1000
