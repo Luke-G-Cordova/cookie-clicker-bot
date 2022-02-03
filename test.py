@@ -1,20 +1,41 @@
 import time
 import threading
+import os
 import pyautogui as ptg
 import keyboard as key
 
 
-# cookieLocation = ptg.locateOnScreen('./assets/cookie.PNG')
-# print(cookieLocation)
+globVars = {
+    "clickAway": False, 
+    "clicks": 0
+}
+def handelCtrlT():
+    if globVars["clickAway"]:
+        globVars["clickAway"] = False
+        print(f'not clicking clicked: {globVars["clicks"]}')
+        globVars["clicks"] = 0
+        time.sleep(.5)
+    else:
+        globVars["clickAway"] = True
+        print('clicking')
+        time.sleep(.5)
 
-# while 1 : 
-#     # ptg.scroll(-15, x = 500, y = 500)
-#     print(ptg.position())
-#     if key.is_pressed('q'): 
-#         quit()
+key.add_hotkey('q', os._exit, args=[0])
+key.add_hotkey('ctrl+i', handelCtrlT)
 
 
-
+def goldenCookie():
+        image = './assets/golden_cookie.PNG'
+        found = ptg.locateOnScreen(image, confidence=0.8)
+        if found == None:
+            return False
+        else:
+            found = ptg.center(found)
+            pos = ptg.position()
+            ptg.click(found.x, found.y)
+            ptg.click(pos.x, pos.y)
+            print('clicked gcookie')
+            return True
 
 def click():
     pos = ptg.position()
@@ -28,50 +49,20 @@ def click():
     ptg.click(pos.x, pos.y)
     ptg.click(pos.x, pos.y)
     ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
-    ptg.click(pos.x, pos.y)
 
-clicks = 0
-c = False
+
+
 while 1 :
-    if key.is_pressed('t'):
-        if c:
-            c = False
-            print(f'not clicking clicked: {clicks}')
-            clicks = 0
-            time.sleep(.5)
-        else:
-            c = True
-            print('clicking')
-            time.sleep(.5)
-    if c:
-        # pos = ptg.position()
-        # ptg.click(pos.x, pos.y)
+    if globVars["clickAway"]:
+        goldenCookie()
         threads = []
         for _ in range(50):
             t = threading.Thread(target=click)
             t.start()
             threads.append(t)
-            clicks += 40
+            globVars["clicks"] += 40
+        
         for thread in threads:
             thread.join()
-    if key.is_pressed('q'):
-        quit()
+
+

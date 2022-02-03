@@ -8,13 +8,19 @@
 </head>
 <body>
     <div class="main" style="background-color: blue;width: 500px;height: 500px;"></div>
+    <img class="cookie" src="./assets/golden_cookie.PNG">
     <script>
         let body = document.querySelector('div.main');
+        let cookie = document.querySelector('img.cookie');
         let count = 0;
         body.addEventListener('click', () =>{
             count ++;
-            console.log(count);
+            // console.log(count);
         });
+        cookie.addEventListener('click', () => {
+            console.log('cookie clicked ' + count);
+            count = 0;
+        })
     </script>
 </body>
 </html>
