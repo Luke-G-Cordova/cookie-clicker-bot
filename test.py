@@ -9,7 +9,7 @@ globVars = {
     "clickAway": False, 
     "clicks": 0
 }
-def handelCtrlT():
+def handelCtrlI():
     if globVars["clickAway"]:
         globVars["clickAway"] = False
         print(f'not clicking clicked: {globVars["clicks"]}')
@@ -21,7 +21,7 @@ def handelCtrlT():
         time.sleep(.5)
 
 key.add_hotkey('q', os._exit, args=[0])
-key.add_hotkey('ctrl+i', handelCtrlT)
+key.add_hotkey('ctrl+i', handelCtrlI)
 
 
 def goldenCookie():
